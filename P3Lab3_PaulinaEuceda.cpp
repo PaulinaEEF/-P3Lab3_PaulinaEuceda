@@ -13,6 +13,7 @@ void imprimirMatriz(int , int, char** matriz);
 void llenarMatriz(int x, int y, char**& matriz);
 char** simulacion(int, int, char**&);
 char** ponerBorde(int, int, char**);
+char** recursiva(int tamanoX, int tamanoY, char** matriz, int turnos);
 
 int main(int argc, char** argv) {
 	//vamo a darle
@@ -37,6 +38,14 @@ int main(int argc, char** argv) {
 				cout << "Ingrese la cantidad de turnos por hacer: ";
 				cin >> cantTurnos;
 				
+				while(tamanoX <= 3 || tamanoY <=3){
+					cout << "Tamanos muy pequenos."<<endl;
+					cout << "Ingrese el tamano en x del tablero: ";
+					cin >> tamanoX;
+					cout << "Ingrese el tamano en y del tablero: ";
+					cin >> tamanoY;
+				}
+				
 				
 				char** matriz = NULL;//instancia
 	
@@ -44,6 +53,8 @@ int main(int argc, char** argv) {
 				
 				llenarMatriz(tamanoX, tamanoY, matriz);
 				imprimirMatriz(tamanoX, tamanoY, matriz);
+				
+				//recursiva(tamanoX, tamanoY, matriz, cantTurnos);
 				for(int i=0; i<cantTurnos; i++){
 					cin.get();
 					matriz = simulacion(tamanoX, tamanoY, matriz);
@@ -52,18 +63,57 @@ int main(int argc, char** argv) {
 						
 				}
 				
-				
-				
-				
-				
 				borrarMatriz(tamanoX, matriz);
-				
-				
 				
 				break;
 			}
 			case 2:{
-				cout<<"adios";
+				int turnos;
+				cout << "Ingrese la cantidad de turnos por hacer: ";
+				cin >> turnos;
+				
+				int x = 22;
+				int y = 22;
+				char temp_mat [22][22] = {	
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ','*',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' ','*',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*','*','*','*',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ','*','*','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ','*','*','*',' ',' ',' ','*','*',' ',' ',' '},
+				{' ',' ',' ','*',' ',' ',' ',' ',' ',' ','*','*','*',' ',' ',' ',' ','*',' ','*',' ',' '},
+				{' ',' ',' ','*',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ','*',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '},
+				{' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '}
+				};
+				char ** mat = new char*[y];
+				for(int i = 0; i < y ; i++){
+					mat[i] = new char[x];
+					for(int j = 0; j < x ; j++){
+						mat[i][j] = temp_mat[i][j];
+					}
+				}
+				
+				for(int i=0; i<turnos; i++){
+					cin.get();
+					mat = simulacion(x, y, mat);
+					
+					imprimirMatriz(x, y, mat);
+						
+				}
+				//conway(mat, x, y, turnos);
 					
 				break;
 			}	
@@ -76,6 +126,18 @@ int main(int argc, char** argv) {
 		}
 	}
 	return 0;
+}
+
+char** recursiva(int tamanoX, int tamanoY, char** matriz, int turnos){
+	if(turnos!=0){
+		cin.get();
+		matriz = simulacion(tamanoX, tamanoY, matriz);
+	
+		imprimirMatriz(tamanoX, tamanoY, matriz);
+		turnos--;
+		recursiva(tamanoX, tamanoY, matriz, turnos);
+	}
+	
 }
 
 char** simulacion(int x, int y, char**& matriz){
