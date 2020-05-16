@@ -54,12 +54,14 @@ int main(int argc, char** argv) {
 				llenarMatriz(tamanoX, tamanoY, matriz);
 				imprimirMatriz(tamanoX, tamanoY, matriz);
 				
-				//recursiva(tamanoX, tamanoY, matriz, cantTurnos);
+				//recursiva(tamanoX, tamanoY, matriz, cantTurnos); lo intente hacer pero nel xD
+				
 				for(int i=0; i<cantTurnos; i++){
 					cin.get();
 					matriz = simulacion(tamanoX, tamanoY, matriz);
 					
 					imprimirMatriz(tamanoX, tamanoY, matriz);
+					cout<<endl;
 						
 				}
 				
@@ -147,150 +149,150 @@ char** simulacion(int x, int y, char**& matriz){
 	matrizTrab = ponerBorde(x, y, matrizTrab);
 	for(int i = 0; i < x; i++){
 		for(int j = 0; j < y; j++){
-			int con = 0;
+			int celViva = 0;
 			if(matriz[i][j] == '*'){//si la casilla tiene un asterisco
 				if( (i+1)!=x && (i-1)!=-1 && (j+1)!=y && (j-1)!=-1){
 					if( matriz[i+1][j]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i][j+1]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j+1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i+1][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i+1][j+1] =='*'){
-						con++;
+						celViva++;
 					}
 				}else{
 					if((i+1)==x){
 						if((j-1)==-1){
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else if((j+1)==y){
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else{
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}
 					}else if((i-1)==-1){
 						if((j-1)==-1){
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else if((j+1)==y){
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else{
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j+1] =='*'){
-								con++;
+								celViva++;
 							}
 						}	
 					}else if((j+1)==y){
 						if(matriz[i+1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i+1][j-1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i][j-1] =='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j-1] =='*'){
-							con++;
+							celViva++;
 						}
 					}else if((j-1)==-1){
 						if(matriz[i+1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i+1][j+1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j+1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i][j+1] =='*'){
-							con++;
+							celViva++;
 						}
 					}
 					
 				}
-				if(con == 2 || con == 3){
+				if(celViva == 2 || celViva == 3){
 					matrizTrab[i][j]='*';
-				}else if(con < 2 ){
+				}else if(celViva < 2 ){
 					matrizTrab[i][j]=' ';
-				}else if(con > 3 ){
+				}else if(celViva > 3 ){
 					matrizTrab[i][j]=' ';
 				}
 			}
@@ -298,146 +300,145 @@ char** simulacion(int x, int y, char**& matriz){
 			else if(matriz[i][j] == ' '){//si la casilla tiene un espacio
 				if( (i+1)!=x && (i-1)!=-1 && (j+1)!=y && (j-1)!=-1){
 					if( matriz[i+1][j]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i][j+1]=='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i-1][j+1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i+1][j-1] =='*'){
-						con++;
+						celViva++;
 					}
 					if(matriz[i+1][j+1] =='*'){
-						con++;
+						celViva++;
 					}
 				}else{
 					if((i+1)==x){
 						if((j-1)==-1){
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else if((j+1)==y){
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else{
 							if(matriz[i-1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i-1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}
 					}else if((i-1)==-1){
 						if((j-1)==-1){
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else if((j+1)==y){
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j-1]=='*'){
-								con++;
+								celViva++;
 							}
 						}else{
 							if(matriz[i+1][j]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j+1]=='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j-1] =='*'){
-								con++;
+								celViva++;
 							}
 							if(matriz[i+1][j+1] =='*'){
-								con++;
+								celViva++;
 							}
 						}	
 					}else if((j+1)==y){
 						if(matriz[i+1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i+1][j-1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i][j-1] =='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j-1] =='*'){
-							con++;
+							celViva++;
 						}
 					}else if((j-1)==-1){
 						if(matriz[i+1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i+1][j+1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i-1][j+1]=='*'){
-							con++;
+							celViva++;
 						}
 						if(matriz[i][j+1] =='*'){
-							con++;
+							celViva++;
 						}
 					}
 					
 				}
-				if(con == 3){
+				if(celViva == 3){
 					matrizTrab[i][j]='*';
 				}
 			}
-			
 		}
 	}
 	borrarMatriz(x, matriz);
